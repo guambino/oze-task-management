@@ -21,6 +21,11 @@
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.getoze</groupId>
+            <artifactId>oze-task-management-service</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
