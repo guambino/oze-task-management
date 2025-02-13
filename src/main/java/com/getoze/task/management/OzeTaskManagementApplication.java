@@ -1,0 +1,13 @@
+package com.getoze.task.management;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class OzeTaskManagementApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(OzeTaskManagementApplication.class, args);
+	}
+
+}
