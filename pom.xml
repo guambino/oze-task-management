@@ -33,6 +33,7 @@
 	<!-- modules -->
 	<modules>
 		<module>oze-task-management-domain</module>
+		<module>oze-task-management-repository</module>
 		<module>oze-task-management-web</module>
 	</modules>
 
@@ -97,6 +98,12 @@
 				<version>${project.version}</version>
 			</dependency>
 
+			<dependency>
+				<groupId>com.getoze</groupId>
+				<artifactId>oze-task-management-repository</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
 		<!-- Swagger -->
 		<dependency>
 			<groupId>org.springdoc</groupId>
@@ -153,6 +160,7 @@
 						<rule>
 							<element>CLASS</element>
 							<excludes>
+								<exclude>com.getoze.task.management.repository.config.RepositoryConfig</exclude>
 								<exclude>com.getoze.task.management.OzeTaskManagementApplication</exclude>
 							</excludes>
 							<limits>

@@ -9,8 +9,17 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <!-- domain -->
-    <artifactId>oze-task-management-domain</artifactId>
-    <name>Oze Task Management Domain</name>
+    <!-- repository -->
+    <artifactId>oze-task-management-repository</artifactId>
+    <name>Oze Task Management Repository</name>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.getoze</groupId>
+            <artifactId>oze-task-management-domain</artifactId>
+        </dependency>
+
+    </dependencies>
 
 </project>
