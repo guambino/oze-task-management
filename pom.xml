@@ -32,6 +32,7 @@
 
 	<!-- modules -->
 	<modules>
+		<module>oze-task-management-domain</module>
 		<module>oze-task-management-web</module>
 	</modules>
 
@@ -90,6 +91,11 @@
 		<dependencies>
 
 		<!-- Oze Task Management -->
+			<dependency>
+				<groupId>com.getoze</groupId>
+				<artifactId>oze-task-management-domain</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 
 		<!-- Swagger -->
 		<dependency>
