@@ -1,10 +1,12 @@
 package com.getoze.task.management.domain.repository;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 import java.io.Serial;
 import java.util.Objects;
-import java.util.UUID;
 
 @Entity
 @Table(name = "TASK_TYPE", schema = "OZE")
@@ -15,17 +17,16 @@ public class TaskType extends AbstractEntity {
 
     @Id
     @Column(name = "TASK_TYPE_ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID taskTypeId;
+    private String taskTypeId;
 
     @Column(name = "DESCRIPTION")
     private String description;
 
-    public UUID getTaskTypeId() {
+    public String getTaskTypeId() {
         return taskTypeId;
     }
 
-    public void setTaskTypeId(UUID taskTypeId) {
+    public void setTaskTypeId(String taskTypeId) {
         this.taskTypeId = taskTypeId;
     }
 
@@ -49,13 +50,5 @@ public class TaskType extends AbstractEntity {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), taskTypeId, description);
-    }
-
-    @Override
-    public String toString() {
-        return "TaskType{" +
-                "taskTypeId=" + taskTypeId +
-                ", description='" + description + '\'' +
-                '}';
     }
 }

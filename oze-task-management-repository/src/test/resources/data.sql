@@ -1,3 +1,3 @@
 INSERT INTO OZE.TASK_TYPE(TASK_TYPE_ID, DESCRIPTION)
-VALUES ( 'BUG', 'Bug' ),
-       ( 'STORY', 'Story' );
+VALUES ( 'TASK_TYPE_BUG', 'Bug' ),
+       ( 'TASK_TYPE_STORY', 'Story' );
