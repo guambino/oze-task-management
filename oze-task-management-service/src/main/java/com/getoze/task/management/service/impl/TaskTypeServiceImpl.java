@@ -2,7 +2,7 @@ package com.getoze.task.management.service.impl;
 
 import com.getoze.task.management.domain.dto.TaskTypeDto;
 import com.getoze.task.management.domain.repository.TaskType;
-import com.getoze.task.management.repository.config.TaskTypeRepository;
+import com.getoze.task.management.repository.TaskTypeRepository;
 import com.getoze.task.management.service.TaskTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

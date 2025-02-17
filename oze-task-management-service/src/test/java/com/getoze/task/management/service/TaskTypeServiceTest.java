@@ -17,6 +17,5 @@ public class TaskTypeServiceTest extends AbstractServiceTest {
     public void listAllTaskTypes(){
         List<TaskTypeDto> taskTypes = taskTypeService.listAllTaskTypes();
         assertNotNull(taskTypes);
-
     }
 }

@@ -1,5 +1,6 @@
 package com.getoze.task.management.domain.repository;
 
+import com.getoze.task.management.domain.dto.TaskTypeDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -21,6 +22,18 @@ public class TaskType extends AbstractEntity {
 
     @Column(name = "DESCRIPTION")
     private String description;
+
+    public TaskType() {
+    }
+
+    public TaskType(String taskTypeId, String description) {
+        this.taskTypeId = taskTypeId;
+        this.description = description;
+    }
+
+    public TaskType(TaskTypeDto taskTypeDto){
+        this(taskTypeDto.getTaskTypeId(),taskTypeDto.getDescription());
+    }
 
     public String getTaskTypeId() {
         return taskTypeId;

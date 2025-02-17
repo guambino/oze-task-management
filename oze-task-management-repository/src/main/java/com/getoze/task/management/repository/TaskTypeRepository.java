@@ -1,4 +1,4 @@
-package com.getoze.task.management.repository.config;
+package com.getoze.task.management.repository;
 
 import com.getoze.task.management.domain.repository.TaskType;
 import org.springframework.data.jpa.repository.JpaRepository;

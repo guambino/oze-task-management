@@ -1,7 +1,6 @@
 package com.getoze.task.management.repository;
 
 import com.getoze.task.management.domain.repository.TaskType;
-import com.getoze.task.management.repository.config.TaskTypeRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
