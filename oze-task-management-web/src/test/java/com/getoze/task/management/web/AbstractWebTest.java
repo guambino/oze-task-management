@@ -18,6 +18,7 @@ public abstract class AbstractWebTest {
 
     protected String objectToJsonString(Object object){
         ObjectMapper mapper = new ObjectMapper();
+        mapper.findAndRegisterModules();
         try {
             return mapper.writeValueAsString(object);
         }catch (Exception e) {
