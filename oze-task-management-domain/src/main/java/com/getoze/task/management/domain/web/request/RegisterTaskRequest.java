@@ -22,5 +22,4 @@ public class RegisterTaskRequest implements Serializable {
 
     private TaskTypeDto taskType;
 
-    private String comment;
 }

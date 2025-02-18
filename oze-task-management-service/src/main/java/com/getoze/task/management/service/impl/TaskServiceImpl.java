@@ -59,11 +59,12 @@ public class TaskServiceImpl implements TaskService {
         if(existingTask.isPresent()){
             TaskDto taskDto = TaskDto.builder()
                     .taskId(taskId)
-                    .taskComment(updateTaskRequest.getTaskComment())
+                    .taskComments(List.of(updateTaskRequest.getTaskComment()))
                     .completionDate(updateTaskRequest.getCompletionDate())
                     .taskType(updateTaskRequest.getTaskType())
                     .title(updateTaskRequest.getTitle())
                     .description(updateTaskRequest.getDescription())
+                    .taskDate(existingTask.get().getTaskDate())
                     .build();
             return updateTask(taskDto);
         }
@@ -88,9 +89,10 @@ public class TaskServiceImpl implements TaskService {
             Task task = taskRepository.save(new Task(taskDto));
 
             //Update or Create Comments if there is any
-            if(null != taskDto.getTaskComment()){
-                TaskCommentDto taskCommentDto = taskDto.getTaskComment();
-                taskCommentRepository.save(new TaskComment(taskCommentDto.getTaskCommentId(), task, taskCommentDto.getComment()));
+            if(null != taskDto.getTaskComments() && !(taskDto.getTaskComments().isEmpty())){
+               for(TaskCommentDto taskCommentDto : taskDto.getTaskComments()){
+                   taskCommentRepository.save(new TaskComment(taskCommentDto.getTaskCommentId(), task, taskCommentDto.getComment()));
+               }
             }
             return new Response<>(Boolean.TRUE, "Task updated successfully");
         }catch (Throwable ex){
@@ -117,18 +119,6 @@ public class TaskServiceImpl implements TaskService {
         return tasks;
     }
 
-
-    private TaskDto createTaskDto(Task task) {
-        return TaskDto.builder()
-                .taskId(task.getTaskId())
-                .taskStatus(task.getTaskStatus())
-                .taskDate(task.getTaskDate())
-                .taskType(TaskTypeDto.builder().taskTypeId(task.getTaskType().getTaskTypeId()).description(task.getTaskType().getDescription()).build())
-                .title(task.getTitle())
-                .description(task.getDescription())
-                .build();
-    }
-
     private  Response<String> deleteTask(Task task) {
         try{
             List<TaskComment> comments = taskCommentRepository.findByTask(task);
@@ -143,6 +133,40 @@ public class TaskServiceImpl implements TaskService {
             log.error(message);
             return new Response<>(Boolean.FALSE, message);
         }
-
     }
+
+    private TaskDto createTaskDto(Task task) {
+        return TaskDto.builder()
+                .taskId(task.getTaskId())
+                .taskStatus(task.getTaskStatus())
+                .taskDate(task.getTaskDate())
+                .taskType(TaskTypeDto.builder().taskTypeId(task.getTaskType().getTaskTypeId()).description(task.getTaskType().getDescription()).build())
+                .title(task.getTitle())
+                .description(task.getDescription())
+                .completionDate(task.getCompletionDate())
+                .taskComments(createTaskComment(task))
+                .build();
+    }
+
+    private List<TaskCommentDto> createTaskComment(Task task){
+        return createTaskComment(taskCommentRepository.findByTask(task));
+    }
+
+    private List<TaskCommentDto> createTaskComment(List<TaskComment> comments) {
+        List<TaskCommentDto> commentDtos = new ArrayList<>();
+
+        comments.forEach(taskComment -> commentDtos.add(createTaskComment(taskComment)));
+
+        return commentDtos;
+    }
+
+    private TaskCommentDto createTaskComment(TaskComment taskComment) {
+        return TaskCommentDto.builder()
+                .taskCommentId(taskComment.getTaskCommentId())
+                .taskId(taskComment.getTask().getTaskId())
+                .comment(taskComment.getComment())
+                .build();
+    }
+
+
 }
