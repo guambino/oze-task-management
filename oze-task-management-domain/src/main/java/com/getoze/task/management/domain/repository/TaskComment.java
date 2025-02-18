@@ -25,6 +25,15 @@ public class TaskComment extends AbstractEntity {
     @Column(name = "COMMENT")
     private String comment;
 
+    public TaskComment() {
+    }
+
+    public TaskComment(UUID taskCommentId, Task task, String comment) {
+        this.taskCommentId = taskCommentId;
+        this.task = task;
+        this.comment = comment;
+    }
+
     public UUID getTaskCommentId() {
         return taskCommentId;
     }

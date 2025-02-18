@@ -3,6 +3,7 @@ package com.getoze.task.management.web.controller;
 import com.getoze.task.management.domain.dto.TaskDto;
 import com.getoze.task.management.domain.enums.TaskStatus;
 import com.getoze.task.management.domain.web.request.RegisterTaskRequest;
+import com.getoze.task.management.domain.web.request.UpdateTaskRequest;
 import com.getoze.task.management.domain.web.response.Response;
 import com.getoze.task.management.service.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/task")
@@ -33,20 +35,20 @@ public class TaskController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/update/{taskId}")
     @Operation(summary = "Updates a Task", description = "Updates a Task")
-    public ResponseEntity<Response<String>> updateTask(@RequestBody TaskDto taskDto ){
-        Response<String> response = taskService.updateTask(taskDto);
+    public ResponseEntity<Response<String>> updateTask(@PathVariable("taskId") UUID taskId,
+                                                       @RequestBody UpdateTaskRequest request ){
+        Response<String> response = taskService.updateTask(taskId, request);
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/{taskId}")
     @Operation(summary = "Deletes a Task", description = "Deletes a Task")
-    public ResponseEntity<Response<String>> deleteTask(@RequestBody TaskDto taskDto ){
-        Response<String> response = taskService.deleteTask(taskDto);
+    public ResponseEntity<Response<String>> deleteTask(@PathVariable("taskId") UUID taskId){
+        Response<String> response = taskService.deleteTask(taskId);
         return ResponseEntity.ok(response);
     }
-
 
     @GetMapping
     @Operation(summary = "Lists All Task", description = "Lists All Task")

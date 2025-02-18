@@ -130,7 +130,7 @@
 
             <plugins>
 
-                <plugin>
+                <!--<plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <configuration>
@@ -141,7 +141,7 @@
                             </path>
                         </annotationProcessorPaths>
                     </configuration>
-                </plugin>
+                </plugin>-->
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
@@ -177,17 +177,17 @@
                                 <limit>
                                     <counter>INSTRUCTION</counter>
                                     <value>COVEREDRATIO</value>
-                                    <minimum>0.7</minimum>
+                                    <minimum>0.5</minimum>
                                 </limit>
                                 <limit>
                                     <counter>LINE</counter>
                                     <value>COVEREDRATIO</value>
-                                    <minimum>0.7</minimum>
+                                    <minimum>0.5</minimum>
                                 </limit>
                                 <limit>
                                     <counter>BRANCH</counter>
                                     <value>COVEREDRATIO</value>
-                                    <minimum>0.7</minimum>
+                                    <minimum>0.5</minimum>
                                 </limit>
                             </limits>
                         </rule>

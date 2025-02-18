@@ -36,6 +36,9 @@ public class Task extends AbstractEntity {
     @Column(name = "TASK_DATE")
     private LocalDate taskDate;
 
+    @Column(name = "COMPLETION_DATE")
+    private LocalDate completionDate;
+
     @ManyToOne
     @JoinColumn(name = "TASK_TYPE_ID", updatable = false)
     private TaskType taskType;
@@ -53,6 +56,7 @@ public class Task extends AbstractEntity {
         this.taskDate = taskDto.getTaskDate();
         this.taskStatus = taskDto.getTaskStatus();
         this.taskType = new TaskType(taskDto.getTaskType());
+        this.completionDate = taskDto.getCompletionDate();
     }
 
     public UUID getTaskId() {
@@ -95,6 +99,14 @@ public class Task extends AbstractEntity {
         this.taskDate = taskDate;
     }
 
+    public LocalDate getCompletionDate() {
+        return completionDate;
+    }
+
+    public void setCompletionDate(LocalDate completionDate) {
+        this.completionDate = completionDate;
+    }
+
     public TaskType getTaskType() {
         return taskType;
     }
@@ -117,12 +129,12 @@ public class Task extends AbstractEntity {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Task task = (Task) o;
-        return Objects.equals(taskId, task.taskId) && Objects.equals(title, task.title) && Objects.equals(description, task.description) && taskStatus == task.taskStatus && Objects.equals(taskDate, task.taskDate) && Objects.equals(taskType, task.taskType) && Objects.equals(comments, task.comments);
+        return Objects.equals(taskId, task.taskId) && Objects.equals(title, task.title) && Objects.equals(description, task.description) && taskStatus == task.taskStatus && Objects.equals(taskDate, task.taskDate) && Objects.equals(completionDate, task.completionDate) && Objects.equals(taskType, task.taskType) && Objects.equals(comments, task.comments);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), taskId, title, description, taskStatus, taskDate, taskType, comments);
+        return Objects.hash(super.hashCode(), taskId, title, description, taskStatus, taskDate, completionDate, taskType, comments);
     }
 
     @Override
@@ -133,6 +145,7 @@ public class Task extends AbstractEntity {
                 ", description='" + description + '\'' +
                 ", taskStatus=" + taskStatus +
                 ", taskDate=" + taskDate +
+                ", completionDate=" + completionDate +
                 ", taskType=" + taskType +
                 ", comments=" + comments +
                 '}';

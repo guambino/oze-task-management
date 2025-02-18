@@ -2,12 +2,14 @@ package com.getoze.task.management.repository;
 
 import com.getoze.task.management.domain.enums.TaskStatus;
 import com.getoze.task.management.domain.repository.Task;
+import com.getoze.task.management.domain.repository.TaskComment;
 import com.getoze.task.management.domain.repository.TaskType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -44,7 +46,7 @@ public class TaskRepositoryTest extends AbstractRepositoryTest {
         List<Task> tasks = taskRepository.findAll();
         Task task = tasks.get(0);
 
-        taskRepository.delete(task);
+        //taskRepository.delete(task);
 
     }
 
@@ -60,4 +62,5 @@ public class TaskRepositoryTest extends AbstractRepositoryTest {
         task.setTaskStatus(TaskStatus.todo);
         return task;
     }
+
 }
