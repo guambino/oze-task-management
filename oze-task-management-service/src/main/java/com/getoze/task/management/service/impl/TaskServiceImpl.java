@@ -107,10 +107,14 @@ public class TaskServiceImpl implements TaskService {
     public Response<String> deleteTask(TaskDto taskDto) {
 
         try{
+            Task task = new Task(taskDto);
 
-            //are there any comments
-            //taskCommentRepository.fin
-            taskRepository.delete(new Task(taskDto));
+            List<TaskComment> comments = taskCommentRepository.findByTask(task);
+
+            if(null != comments && !(comments.isEmpty())){
+                taskCommentRepository.deleteAll(comments);
+            }
+            taskRepository.delete(task);
             return new Response<>(Boolean.TRUE, "Task deleted successfully");
         }catch (Exception ex){
             String message = String.format("Error deleting a task  %s", ex.getMessage());

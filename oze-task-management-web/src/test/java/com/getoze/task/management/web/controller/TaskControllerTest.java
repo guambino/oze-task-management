@@ -1,9 +1,11 @@
 package com.getoze.task.management.web.controller;
 
+import com.getoze.task.management.domain.dto.TaskCommentDto;
 import com.getoze.task.management.domain.dto.TaskDto;
 import com.getoze.task.management.domain.dto.TaskTypeDto;
 import com.getoze.task.management.domain.enums.TaskStatus;
 import com.getoze.task.management.domain.web.request.RegisterTaskRequest;
+import com.getoze.task.management.domain.web.request.UpdateTaskRequest;
 import com.getoze.task.management.service.TaskService;
 import com.getoze.task.management.web.AbstractWebTest;
 import org.junit.jupiter.api.Test;
@@ -44,9 +46,9 @@ public class TaskControllerTest extends AbstractWebTest {
     public void updateTask() throws Exception {
         when(taskService.updateTask(getTaskDto())).thenReturn(getResponse("Updated"));
 
-        String requestBody = objectToJsonString(getTaskDto());
+        String requestBody = objectToJsonString(getUpdateTaskRequest());
 
-        mockMvc.perform(put("/task/update")
+        mockMvc.perform(put("/task/update/" + UUID.randomUUID())
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
@@ -102,5 +104,14 @@ public class TaskControllerTest extends AbstractWebTest {
         registerTaskRequest.setTitle("Title");
         registerTaskRequest.setDescription("Description");
         return registerTaskRequest;
+    }
+
+    private UpdateTaskRequest getUpdateTaskRequest(){
+        UpdateTaskRequest updateTaskRequest = new UpdateTaskRequest();
+        updateTaskRequest.setTaskType(TaskTypeDto.builder().taskTypeId("BUG").build());
+        updateTaskRequest.setTitle("Title");
+        updateTaskRequest.setDescription("Description");
+        updateTaskRequest.setTaskComment(TaskCommentDto.builder().comment("New Comment").build());
+        return updateTaskRequest;
     }
 }

@@ -1,6 +1,5 @@
 package com.getoze.task.management.domain.repository;
 
-import com.getoze.task.management.domain.dto.TaskCommentDto;
 import jakarta.persistence.*;
 
 import java.io.Serial;

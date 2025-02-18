@@ -5,6 +5,9 @@ import com.getoze.task.management.domain.repository.TaskComment;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class TaskCommentRepositoryTest extends AbstractRepositoryTest {
@@ -34,6 +37,13 @@ public class TaskCommentRepositoryTest extends AbstractRepositoryTest {
 
         taskCommentRepository.delete(taskComment);
 
+    }
+
+    @Test
+    public void findByTaskId(){
+        Task task =  taskRepository.findAll().get(0);
+        List<TaskComment> comments = taskCommentRepository.findByTask(task);
+        assertNotNull(comments);
     }
 
 

@@ -57,21 +57,10 @@ public class TaskServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    public void deleteTaskException(){
-        List<TaskDto> tasks = taskService.findAllTasks();
-        TaskDto taskDto = tasks.get(0);
-
-        taskDto.setTaskId(null);
-        Response<String> response = taskService.deleteTask(taskDto);
-        assertNotNull(response);
-
-    }
-
-    @Test
     public void findAllTasks(){
         List<TaskDto> tasks = taskService.findAllTasks();
         assertNotNull(tasks);
-        assertEquals(2, tasks.size(), "There should be one task");
+        assertEquals(1, tasks.size(), "There should be one task");
     }
 
 

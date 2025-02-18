@@ -3,6 +3,7 @@ package com.getoze.task.management.web.controller;
 import com.getoze.task.management.domain.dto.TaskDto;
 import com.getoze.task.management.domain.enums.TaskStatus;
 import com.getoze.task.management.domain.web.request.RegisterTaskRequest;
+import com.getoze.task.management.domain.web.request.UpdateTaskRequest;
 import com.getoze.task.management.domain.web.response.Response;
 import com.getoze.task.management.service.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -34,11 +35,11 @@ public class TaskController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/update/{taskId}")
     @Operation(summary = "Updates a Task", description = "Updates a Task")
     public ResponseEntity<Response<String>> updateTask(@PathVariable("taskId") UUID taskId,
-                                                       @RequestBody TaskDto taskDto ){
-        Response<String> response = taskService.updateTask(taskDto);
+                                                       @RequestBody UpdateTaskRequest request ){
+        Response<String> response = taskService.updateTask(taskId, request);
         return ResponseEntity.ok(response);
     }
 
