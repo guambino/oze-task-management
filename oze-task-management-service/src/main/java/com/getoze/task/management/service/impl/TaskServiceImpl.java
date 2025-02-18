@@ -28,7 +28,7 @@ public class TaskServiceImpl implements TaskService {
     public Response<String> registerTask(TaskDto taskDto) {
 
         try{
-            taskRepository.save(new Task(taskDto));
+            Task task = taskRepository.save(new Task(taskDto));
             return new Response<>(Boolean.TRUE, "Task registered successfully");
         }catch (Exception ex){
             String message = String.format("Error update a task  %s", ex.getMessage());

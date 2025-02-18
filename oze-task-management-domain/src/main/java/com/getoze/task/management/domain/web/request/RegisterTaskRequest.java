@@ -15,4 +15,6 @@ public class RegisterTaskRequest {
     private String description;
 
     private TaskTypeDto taskType;
+
+    private String comment;
 }
