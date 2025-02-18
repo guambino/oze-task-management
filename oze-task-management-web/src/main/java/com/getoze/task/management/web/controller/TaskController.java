@@ -1,0 +1,70 @@
+package com.getoze.task.management.web.controller;
+
+import com.getoze.task.management.domain.dto.TaskDto;
+import com.getoze.task.management.domain.enums.TaskStatus;
+import com.getoze.task.management.domain.web.request.RegisterTaskRequest;
+import com.getoze.task.management.domain.web.response.Response;
+import com.getoze.task.management.service.TaskService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.List;
+
+@RestController
+@RequestMapping("/task")
+@Tag(name = "Task API.", description = "Endpoints related to Task.")
+public class TaskController {
+
+    private final TaskService taskService;
+
+    @Autowired
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
+    }
+
+    @PostMapping("/register")
+    @Operation(summary = "Registers a new Task", description = "Registers a new Task")
+    public ResponseEntity<Response<String>> registerTask(@RequestBody RegisterTaskRequest request) {
+        Response<String> response = taskService.registerTask(getTaskDto(request));
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/update")
+    @Operation(summary = "Updates a Task", description = "Updates a Task")
+    public ResponseEntity<Response<String>> updateTask(@RequestBody TaskDto taskDto ){
+        Response<String> response = taskService.updateTask(taskDto);
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/delete")
+    @Operation(summary = "Deletes a Task", description = "Deletes a Task")
+    public ResponseEntity<Response<String>> deleteTask(@RequestBody TaskDto taskDto ){
+        Response<String> response = taskService.deleteTask(taskDto);
+        return ResponseEntity.ok(response);
+    }
+
+
+    @GetMapping
+    @Operation(summary = "Lists All Task", description = "Lists All Task")
+    public ResponseEntity<Response<List<TaskDto>>> findAllTasks() {
+        List<TaskDto> tasks = taskService.findAllTasks();
+        Response<List<TaskDto>> response = new Response<>(Boolean.TRUE, "Listed all Tasks", tasks);
+        return ResponseEntity.ok(response);
+    }
+
+    private TaskDto getTaskDto(RegisterTaskRequest request) {
+        return TaskDto.builder()
+                .taskType(request.getTaskType())
+                .taskDate(LocalDate.now())
+                .title(request.getTitle())
+                .taskStatus(TaskStatus.todo)
+                .description(request.getDescription())
+                .build();
+    }
+
+
+}
