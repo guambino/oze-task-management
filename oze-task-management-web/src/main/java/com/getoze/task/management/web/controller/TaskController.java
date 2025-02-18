@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/task")
@@ -35,7 +36,8 @@ public class TaskController {
 
     @PutMapping("/update")
     @Operation(summary = "Updates a Task", description = "Updates a Task")
-    public ResponseEntity<Response<String>> updateTask(@RequestBody TaskDto taskDto ){
+    public ResponseEntity<Response<String>> updateTask(@PathVariable("taskId") UUID taskId,
+                                                       @RequestBody TaskDto taskDto ){
         Response<String> response = taskService.updateTask(taskDto);
         return ResponseEntity.ok(response);
     }
