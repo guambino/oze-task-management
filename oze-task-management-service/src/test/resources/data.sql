@@ -1,3 +1,6 @@
+INSERT INTO OZE.USERS(USER_ID, FIRST_NAME, LAST_NAME, EMAIL, PASSWORD)
+VALUES ( random_uuid(), 'Tony', 'Starks', 'tony.starks@marvel.com','TonyStarks2025#' );
+
 INSERT INTO OZE.TASK_TYPE(TASK_TYPE_ID, DESCRIPTION)
 VALUES ( 'TASK_TYPE_BUG', 'Bug' ),
        ( 'TASK_TYPE_STORY', 'Story' );
