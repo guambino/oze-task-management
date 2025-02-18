@@ -33,4 +33,6 @@ public class TaskDto implements Serializable  {
     private LocalDate taskDate;
 
     private TaskTypeDto taskType;
+
+    private LocalDate completionDate;
 }
