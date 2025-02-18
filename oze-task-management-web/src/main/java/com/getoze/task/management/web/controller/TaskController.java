@@ -43,13 +43,12 @@ public class TaskController {
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/{taskId}")
     @Operation(summary = "Deletes a Task", description = "Deletes a Task")
-    public ResponseEntity<Response<String>> deleteTask(@RequestBody TaskDto taskDto ){
-        Response<String> response = taskService.deleteTask(taskDto);
+    public ResponseEntity<Response<String>> deleteTask(@PathVariable("taskId") UUID taskId){
+        Response<String> response = taskService.deleteTask(taskId);
         return ResponseEntity.ok(response);
     }
-
 
     @GetMapping
     @Operation(summary = "Lists All Task", description = "Lists All Task")

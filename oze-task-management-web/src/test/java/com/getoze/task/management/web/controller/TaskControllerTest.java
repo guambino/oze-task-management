@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -60,11 +61,11 @@ public class TaskControllerTest extends AbstractWebTest {
 
     @Test
     public void deleteTask() throws Exception {
-        when(taskService.deleteTask(getTaskDto())).thenReturn(getResponse("Deleted"));
+        when(taskService.deleteTask(any(UUID.class))).thenReturn(getResponse("Deleted"));
 
         String requestBody = objectToJsonString(getTaskDto());
 
-        mockMvc.perform(delete("/task/delete")
+        mockMvc.perform(delete("/task/delete/"  + UUID.randomUUID())
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))

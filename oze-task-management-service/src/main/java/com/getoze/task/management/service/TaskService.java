@@ -18,5 +18,7 @@ public interface TaskService {
 
     Response<String> deleteTask(TaskDto taskDto);
 
+    Response<String> deleteTask(UUID taskId);
+
     List<TaskDto> findAllTasks();
 }

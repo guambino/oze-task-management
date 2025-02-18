@@ -42,7 +42,7 @@ public class TaskServiceImpl implements TaskService {
         try{
             taskRepository.save(new Task(taskDto));
             return new Response<>(Boolean.TRUE, "Task registered successfully");
-        }catch (Exception ex){
+        }catch (Throwable ex){
             String message = String.format("Error update a task  %s", ex.getMessage());
             log.error(message);
             return new Response<>(Boolean.FALSE, message);
@@ -93,35 +93,21 @@ public class TaskServiceImpl implements TaskService {
                 taskCommentRepository.save(new TaskComment(taskCommentDto.getTaskCommentId(), task, taskCommentDto.getComment()));
             }
             return new Response<>(Boolean.TRUE, "Task updated successfully");
-        }catch (Exception ex){
+        }catch (Throwable ex){
             String message = String.format("Error update a task  %s", ex.getMessage());
             log.error(message);
             return new Response<>(Boolean.FALSE, message);
         }
-
     }
-
-
 
     @Override
     public Response<String> deleteTask(TaskDto taskDto) {
+        return deleteTask( new Task(taskDto));
+    }
 
-        try{
-            Task task = new Task(taskDto);
-
-            List<TaskComment> comments = taskCommentRepository.findByTask(task);
-
-            if(null != comments && !(comments.isEmpty())){
-                taskCommentRepository.deleteAll(comments);
-            }
-            taskRepository.delete(task);
-            return new Response<>(Boolean.TRUE, "Task deleted successfully");
-        }catch (Exception ex){
-            String message = String.format("Error deleting a task  %s", ex.getMessage());
-            log.error(message);
-            return new Response<>(Boolean.FALSE, message);
-        }
-
+    @Override
+    public Response<String> deleteTask(UUID taskId) {
+        return deleteTask(taskRepository.findById(taskId).orElse(null));
     }
 
     @Override
@@ -141,5 +127,22 @@ public class TaskServiceImpl implements TaskService {
                 .title(task.getTitle())
                 .description(task.getDescription())
                 .build();
+    }
+
+    private  Response<String> deleteTask(Task task) {
+        try{
+            List<TaskComment> comments = taskCommentRepository.findByTask(task);
+
+            if(null != comments && !(comments.isEmpty())){
+                taskCommentRepository.deleteAll(comments);
+            }
+            taskRepository.delete(task);
+            return new Response<>(Boolean.TRUE, "Task deleted successfully");
+        }catch (Throwable ex){
+            String message = String.format("Error deleting a task  %s", ex.getMessage());
+            log.error(message);
+            return new Response<>(Boolean.FALSE, message);
+        }
+
     }
 }
