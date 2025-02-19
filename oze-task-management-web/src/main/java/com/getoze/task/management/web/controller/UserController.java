@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/task/auth/user")
 @Tag(name = "User API.", description = "Endpoints related for User.")
 public class UserController {
 
