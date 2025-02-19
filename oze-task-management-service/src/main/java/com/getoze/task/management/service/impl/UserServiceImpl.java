@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -38,6 +41,15 @@ public class UserServiceImpl implements UserService {
         return response;
     }
 
+    @Override
+    public List<UserDto> getAllUsers() {
+        List<UserDto> users = new ArrayList<>();
+
+        userRepository.findAll().forEach(user -> users.add(getUserDto(user)));
+
+        return users;
+    }
+
     private User getUser(UserDto userDto){
         User user = new User();
         user.setFirstName(userDto.getFirstName());
@@ -45,5 +57,14 @@ public class UserServiceImpl implements UserService {
         user.setEmail(userDto.getEmail());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         return user;
+    }
+
+    private UserDto getUserDto(User user){
+        return UserDto.builder()
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .email(user.getEmail())
+                .password(user.getPassword())
+                .build();
     }
 }
