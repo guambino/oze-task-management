@@ -23,7 +23,7 @@ public class UserControllerTest extends AbstractWebTest  {
 
         String requestBody = objectToJsonString(getUserDto());
 
-        mockMvc.perform(post("/user/register")
+        mockMvc.perform(post("/task/auth/user/register")
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
