@@ -14,12 +14,6 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @Configuration
 public class SecurityConfig {
 
-    /**
-     * <p>
-     *     whitelisting the /task/auth/**
-     * </p>
-     *
-     */
     @Bean
     public SecurityFilterChain securityFilterChain(final HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
