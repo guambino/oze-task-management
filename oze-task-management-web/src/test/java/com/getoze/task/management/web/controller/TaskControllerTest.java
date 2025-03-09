@@ -33,7 +33,7 @@ public class TaskControllerTest extends AbstractWebTest {
 
         String requestBody = objectToJsonString(getRegisterTaskRequest());
 
-        mockMvc.perform(post("/task/register")
+        mockMvc.perform(post("/task")
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
@@ -49,7 +49,7 @@ public class TaskControllerTest extends AbstractWebTest {
 
         String requestBody = objectToJsonString(getUpdateTaskRequest());
 
-        mockMvc.perform(put("/task/update/" + UUID.randomUUID())
+        mockMvc.perform(put("/task/" + UUID.randomUUID())
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
@@ -65,7 +65,7 @@ public class TaskControllerTest extends AbstractWebTest {
 
         String requestBody = objectToJsonString(getTaskDto());
 
-        mockMvc.perform(delete("/task/delete/"  + UUID.randomUUID())
+        mockMvc.perform(delete("/task/"  + UUID.randomUUID())
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))

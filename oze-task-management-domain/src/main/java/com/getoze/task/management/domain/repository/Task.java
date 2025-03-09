@@ -43,7 +43,7 @@ public class Task extends AbstractEntity {
     @JoinColumn(name = "TASK_TYPE_ID", updatable = false)
     private TaskType taskType;
 
-    @OneToMany(mappedBy = "task")
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<TaskComment> comments = new HashSet<>();
 
     public Task() {
