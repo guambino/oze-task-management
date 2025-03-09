@@ -28,14 +28,14 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @PostMapping("/register")
+    @PostMapping()
     @Operation(summary = "Registers a new Task", description = "Registers a new Task")
     public ResponseEntity<Response<String>> registerTask(@RequestBody RegisterTaskRequest request) {
         Response<String> response = taskService.registerTask(getTaskDto(request));
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/update/{taskId}")
+    @PutMapping("/{taskId}")
     @Operation(summary = "Updates a Task", description = "Updates a Task")
     public ResponseEntity<Response<String>> updateTask(@PathVariable("taskId") UUID taskId,
                                                        @RequestBody UpdateTaskRequest request ){
@@ -43,7 +43,7 @@ public class TaskController {
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping("/delete/{taskId}")
+    @DeleteMapping("/{taskId:[a-z-]+}.{number:[\\d]+}")
     @Operation(summary = "Deletes a Task", description = "Deletes a Task")
     public ResponseEntity<Response<String>> deleteTask(@PathVariable("taskId") UUID taskId){
         Response<String> response = taskService.deleteTask(taskId);
